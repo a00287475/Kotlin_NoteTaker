@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "notetaker-95b7a",
+    "noter": "notetaker-95b7a"
+  },
+  "targets": {},
+  "etags": {}
+}

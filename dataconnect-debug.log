@@ -1,0 +1,15 @@
+I0219 17:20:28.915335   15860 load.go:37] Reloading schema and connectors...
+I0219 17:20:28.942831   15860 control.go:59] [/emulator/notetaker cab2] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\mutations.gql [1233B] connector\queries.gql [1802B] 
+I0219 17:20:28.956390   15860 codegen.go:82] [connector "default" kotlinSdk] Generating sources into "C:\\Users\\vishn\\Documents\\NoteTaker\\dataconnect-generated\\kotlin\\connectors\\default"
+I0219 17:20:28.958902   15860 collector.go:107] schema extensions wrote into "C:\\Users\\vishn\\Documents\\NoteTaker\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [65218B] 
+I0219 17:20:28.962468   15860 collector.go:107] connector "default" kotlinSdk wrote into "C:\\Users\\vishn\\Documents\\NoteTaker\\dataconnect-generated\\kotlin\\connectors\\default"
+Generated sources: DefaultConnector.kt [8304B] DefaultConnectorKeys.kt [799B] DefaultConnectorEnums.kt [797B] 
+I0219 17:20:28.962468   15860 load.go:115] Finished reloading
+I0219 17:20:28.964007   15860 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I0219 17:20:28.964007   15860 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399
+I0219 17:20:32.065027   15860 control.go:59] [/emulator/notetaker 9158] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\queries.gql [1802B] connector\mutations.gql [1233B] 
