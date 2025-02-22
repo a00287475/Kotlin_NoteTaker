@@ -68,7 +68,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.9.1")
     implementation ("com.google.firebase:firebase-firestore-ktx")
     implementation ("androidx.navigation:navigation-compose:2.6.0")
-
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")  // ViewModel dependency
+    implementation ("androidx.activity:activity-compose:1.6.0")
 
 
 

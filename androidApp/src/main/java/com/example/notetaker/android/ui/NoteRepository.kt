@@ -25,6 +25,29 @@ class NoteRepository {
                 callback(false, "Error saving note: ${e.message}")
             }
     }
+
+    class NoteRepository {
+        private val firestore = FirebaseFirestore.getInstance()
+
+//        fun updateNote(noteId: String, title: String, content: String, callback: (Boolean, String) -> Unit) {
+//            val noteRef = firestore.collection("notes").document(noteId)
+//            // Directly update the fields
+//            noteRef.update("title", title, "content", content)
+//                .addOnSuccessListener {
+//                    callback(true, "Note updated successfully!")
+//                }
+//                .addOnFailureListener { e ->
+//                    callback(false, "Error updating note: ${e.message}")
+////                }
+//    }
+    }
+    fun updateNote(noteId: String, title: String, content: String, callback: (Boolean, String) -> Unit) {
+        val updatedNote = hashMapOf(
+            "title" to title,
+            "content" to content,
+            "timestamp" to System.currentTimeMillis()
+        )
+    }
     fun fetchNotes(callback: (List<Map<String, Any>>) -> Unit) {
         db.collection("notes")
             .get()

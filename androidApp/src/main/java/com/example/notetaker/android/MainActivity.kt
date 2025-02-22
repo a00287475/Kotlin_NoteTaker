@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.notetaker.android.ui.EditNoteScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,17 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("notetaking_screen") {
                     NoteTakingScreen(navController = navController)// Add your Note taking screen here
+                }
+                composable("edit_note_screen/{noteId}/{title}/{content}") { backStackEntry ->
+                    val noteId = backStackEntry.arguments?.getString("noteId") ?: ""
+                    val title = backStackEntry.arguments?.getString("title") ?: ""
+                    val content = backStackEntry.arguments?.getString("content") ?: ""
+                    EditNoteScreen(
+                        navController = navController,
+                        noteId = noteId,
+                        initialTitle = title,
+                        initialContent = content
+                    )
                 }
             }
         }

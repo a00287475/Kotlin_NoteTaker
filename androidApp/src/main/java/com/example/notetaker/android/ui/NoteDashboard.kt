@@ -56,6 +56,37 @@ fun NoteDashboard(navController: NavController) {
         Toast.makeText(context, "Selected notes deleted", Toast.LENGTH_SHORT).show()
     }
 
+    // Function to delete selected notes for edit
+    fun deleteSelectedNote(value: Any?) {
+        // Remove selected notes from Firestore
+        selectedNotes.forEach { note ->
+            val noteId = note["id"]?.toString()
+            if (noteId != null) {
+                db.collection("notes").document(noteId).delete()
+            }
+        }
+
+        // Remove selected notes from UI
+        notes.value = notes.value.filterNot { it in selectedNotes }
+
+        // Clear selection
+        selectedNotes = emptySet()
+
+        Toast.makeText(context, "editing", Toast.LENGTH_SHORT).show()
+    }
+
+    // Function to handle edit button click
+    fun editSelectedNote( ){
+        selectedNotes.firstOrNull()?.let { note ->
+            val noteId = note["id"]?.toString()
+            val title = note["title"]?.toString() ?: ""
+            val content = note["content"]?.toString() ?: ""
+            if (noteId != null) {
+                navController.navigate("edit_note_screen/$noteId/$title/$content")
+            }
+        }
+    }
+
     // Layout for the NoteDashboard
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
@@ -86,7 +117,8 @@ fun NoteDashboard(navController: NavController) {
         // Edit and Delete buttons for selected notes
         if (selectedNotes.isNotEmpty()) {
             Button(
-                onClick = { /* Edit functionality, navigate to edit screen */ },
+                onClick = {  editSelectedNote()
+                    deleteSelectedNote(selectedNotes) },
                 modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
             ) {
                 Text(text = "Edit Note")
@@ -144,7 +176,8 @@ fun NoteItem(note: Map<String, Any>, isSelected: Boolean, onSelect: (Boolean) ->
             .background(backgroundColor)
             .selectable(selected = isSelected, onClick = { onSelect(!isSelected) }),
         shape = MaterialTheme.shapes.medium,
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
@@ -196,7 +229,7 @@ class NoteDashboard {
     private val noteRepository = NoteRepository() // ✅ Use Repository
 
     fun loadNotes() {
-        noteRepository.fetchNotes { notes ->
+        noteRepository.fetchNotes { notes -> //calling fetch notes here
             notes.forEach { note ->
                 Log.d("NoteDashboard", "Note: ${note["title"]}")
             }
